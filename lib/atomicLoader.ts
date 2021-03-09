@@ -1,9 +1,9 @@
 'use strict';
 
-import * as Atomizer from 'atomizer';
+import Atomizer from 'atomizer';
 import * as cssnano from 'cssnano';
 import { getOptions } from 'loader-utils';
-import * as postcss from 'postcss';
+import postcss from 'postcss';
 
 import { writeCssFile, ensureExists } from './utils';
 
@@ -46,20 +46,16 @@ const parseAndGenerateFile = function(
 ): Promise<Function> {
     return new Promise((resolve, reject) => {
 
+        if (config.options && config.options.rules) {
+            atomizer.addRules(config.options.rules);
+        }
+        
         const foundClasses = atomizer.findClassNames(source);
         let cssDest = config.cssDest || DEFAULT_CSS_DEST;
 
         if (!ensureExists(cssDest)) {
             console.warn('[atomic loader] create css failed.');
             return;
-        }
-
-        // custom rules file
-        if (config.options && config.options.rules) {
-            const customRules = require(require.resolve(config.options.rules));
-            if (customRules) {
-                atomizer.addRules(customRules);
-            }
         }
 
         const finalConfig = atomizer.getConfig(foundClasses, config.configs || {});

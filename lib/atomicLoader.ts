@@ -1,6 +1,6 @@
 'use strict';
 
-import Atomizer from 'atomizer';
+import * as Atomizer from 'atomizer';
 import * as cssnano from 'cssnano';
 import { getOptions } from 'loader-utils';
 import postcss from 'postcss';

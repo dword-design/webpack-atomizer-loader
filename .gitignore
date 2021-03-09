@@ -3,5 +3,4 @@ node_modules/
 example/*.css
 example/bundle.js
 coverage/
-dist/
 build/

@@ -221,17 +221,16 @@ atob@^2.1.1:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-atomizer@^3.5.1:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/atomizer/-/atomizer-3.6.0.tgz#e20feec828a57366bdc484bd6a8738f8971262ac"
-  integrity sha512-Mc+N0sE1a/kzJh3WIYnwDTuAk5wkdNGu1fODxf1YAOZqPGCPOIQQ5UgdH3bMAfuk0KJKuyJpK4koEdEECxUJ+g==
+atomizer@3.9.1:
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/atomizer/-/atomizer-3.9.1.tgz#cf9e3a8854b822d1113d56c6ea03ac7b9ab904a7"
+  integrity sha512-eM6AtIX8/5sC+l9nqgl4pdF+CiakhAlr3RW9rHMxsa1T0RzQqwwrQoKt7bMiIH6eSrYhdfL3xQojlNSwA47D7w==
   dependencies:
     chalk "^2.0.0"
     chokidar "^3.0.0"
     commander "^2.19.0"
     lodash "^4.17.11"
     minimatch "^3.0.4"
-    object-assign "^4.0.0"
     xregexp "^4.0.0"
 
 autoprefixer@^7.2.6:
@@ -3090,7 +3089,7 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-object-assign@^4.0.0, object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
+object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
   integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=

@@ -55,7 +55,11 @@ const parseAndGenerateFile = function(
 
         // custom rules file
         if (pathConfig.options && pathConfig.options.rules) {
-            atomizer.addRules(pathConfig.options.rules);
+            atomizer.addRules(
+                typeof pathConfig.options.rules === 'string'
+                    ? require(require.resolve(pathConfig.options.rules))
+                    : pathConfig.options.rules
+            );
         }
         
         const foundClasses = atomizer.findClassNames(source);

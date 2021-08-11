@@ -2,7 +2,7 @@
 var fs = require('fs');
 var expect = require('chai').expect;
 var atomicLoader = require('../dist/atomicLoader');
-var path = require('path')
+var path = require('path');
 
 describe('atomic loader', () => {
   it('can generate correct css', (done) => {

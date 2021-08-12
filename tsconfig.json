@@ -1,9 +1,12 @@
 {
     "compileOnSave": true,
     "compilerOptions": {
+        "esModuleInterop": true,
         "moduleResolution": "node",
         "outDir": "./dist",
-        "lib": ["esnext"]
+        "lib": ["esnext"],
+        "target": "es5",
+        "skipLibCheck": true
     },
     "declaration": true,
     "exclude": ["node_modules"],

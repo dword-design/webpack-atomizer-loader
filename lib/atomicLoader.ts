@@ -1,9 +1,9 @@
 'use strict';
 
-import * as Atomizer from 'atomizer';
-import * as cssnano from 'cssnano';
+import Atomizer, { CSSOptions } from 'atomizer';
+import cssnano from 'cssnano';
 import { getOptions } from 'loader-utils';
-import * as postcss from 'postcss';
+import postcss from 'postcss';
 
 import { writeCssFile, ensureExists } from './utils';
 
@@ -13,7 +13,7 @@ const DEFAULT_POSTCSS_PLUGIN_LIST: string[] = [];
 // cached response to prevent unnecessary update
 let cachedResponse: string = '';
 
-const atomizer: any = new Atomizer({ verbose: true });
+const atomizer = new Atomizer({ verbose: true });
 
 interface ConfigObject {
     default: object;
@@ -23,12 +23,12 @@ interface ConfigObject {
 let configObject: ConfigObject = {
     default: {
         configs: {
-            classNames: []
-        }
-    }
+            classNames: [],
+        },
+    },
 };
 
-interface PathConfigOption {
+interface PathConfigOption extends CSSOptions {
     rules: string;
 }
 
@@ -43,7 +43,7 @@ const parseAndGenerateFile = function(
     source: string,
     validPostcssPlugins = [],
     minimize: boolean = false
-): Promise<Function> {
+): Promise<void | Function> {
     return new Promise((resolve, reject) => {
 
         const foundClasses = atomizer.findClassNames(source);
@@ -54,14 +54,6 @@ const parseAndGenerateFile = function(
             return;
         }
 
-        // custom rules file
-        if (config.options && config.options.rules) {
-            const customRules = require(require.resolve(config.options.rules));
-            if (customRules) {
-                atomizer.addRules(customRules);
-            }
-        }
-
         const finalConfig = atomizer.getConfig(foundClasses, config.configs || {});
         const cssString: string = atomizer.getCss(finalConfig, config.options || {});
 
@@ -70,7 +62,7 @@ const parseAndGenerateFile = function(
             pipeline.use(cssnano());
         }
 
-        pipeline.process(cssString, { from: undefined }).then(result => {
+        pipeline.process(cssString, { from: undefined }).then((result) => {
             const { css = '' } = result;
 
             if (css === cachedResponse) {
@@ -82,12 +74,12 @@ const parseAndGenerateFile = function(
                     cachedResponse = css;
                     return resolve();
                 })
-                .catch(err => reject(err));
+                .catch((err) => reject(err));
         });
     });
 };
 
-const atomicLoader = function(source, map) {
+const atomicLoader = function (source, map) {
     const callback = this.async();
     if (this.cacheable) {
         this.cacheable();
@@ -119,7 +111,7 @@ const atomicLoader = function(source, map) {
         .then(() => {
             return callback(null, source);
         })
-        .catch(err => {
+        .catch((err) => {
             return callback(err, source);
         });
 };

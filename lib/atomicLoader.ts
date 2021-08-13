@@ -43,7 +43,7 @@ const parseAndGenerateFile = function(
     source: string,
     validPostcssPlugins = [],
     minimize: boolean = false
-): Promise<void | Function> {
+): Promise<void> {
     return new Promise((resolve, reject) => {
 
         const foundClasses = atomizer.findClassNames(source);
@@ -96,14 +96,14 @@ const atomicLoader = function (source, map) {
         ...[]
             .concat(configPath)
             .map(configPath => require(require.resolve(configPath))),
-        ...config !== undefined ? [query.config] : [],
+        ...config !== undefined ? [config] : [],
     ]
 
     if (configs.length === 0) {
         configs.push(configObject.default)
     }
 
-    const tasks: Promise<Function>[] = configs.map(config => {
+    const tasks: Promise<void>[] = configs.map(config => {
         return parseAndGenerateFile(config, source, validPostcssPlugins, minimize);
     });
 

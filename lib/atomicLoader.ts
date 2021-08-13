@@ -46,6 +46,15 @@ const parseAndGenerateFile = function(
 ): Promise<void> {
     return new Promise((resolve, reject) => {
 
+        // custom rules file
+        if (config.options && config.options.rules) {
+            atomizer.addRules(
+                typeof config.options.rules === 'string'
+                    ? require(require.resolve(config.options.rules))
+                    : config.options.rules
+            );
+        }
+
         const foundClasses = atomizer.findClassNames(source);
         let cssDest = config.cssDest || DEFAULT_CSS_DEST;
 

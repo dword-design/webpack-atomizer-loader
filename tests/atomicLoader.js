@@ -39,50 +39,50 @@ describe('atomic loader', () => {
         atomicLoader.call(this, '<div class="Foo"></div>');
     });
     it('config path', (done) => {
-      this.async = () => (err, source) => {
-        var cssReg = new RegExp(/\.Bgc\\\(foo\\\)/);
-        const cssFile = fs.readFileSync('./build/css/atomic.css', 'utf8');
-        expect(cssReg.test(cssFile)).to.equal(true);
-        done();
-      };
-      this.query = {
-        configPath: path.resolve(__dirname, 'fixtures', 'simple.config.js'),
-      }
-      atomicLoader.call(this, '<div class="Bgc(foo)"></div>');
+        this.async = () => (err, source) => {
+            var cssReg = new RegExp(/\.Bgc\\\(foo\\\)/);
+            const cssFile = fs.readFileSync('./build/css/atomic.css', 'utf8');
+            expect(cssReg.test(cssFile)).to.equal(true);
+            done();
+        };
+        this.query = {
+            configPath: path.resolve(__dirname, 'fixtures', 'simple.config.js'),
+        };
+        atomicLoader.call(this, '<div class="Bgc(foo)"></div>');
     });
-  
+
     it('multiple config paths', (done) => {
-      this.async = () => (err, source) => {
-        const cssFile = fs.readFileSync('./build/css/atomic.css', 'utf8');
-        expect(/\.Bgc\\\(foo\\\)/.test(cssFile)).to.equal(false);
-        expect(/\.C\\\(bar\\\)/.test(cssFile)).to.equal(true);
-        done();
-      };
-      this.query = {
-        configPath: [
-          path.resolve(__dirname, 'fixtures', 'simple.config.js'),
-          path.resolve(__dirname, 'fixtures', 'simple2.config.js'),
-        ],
-      }
-      atomicLoader.call(this, '<div class="Bgc(foo) C(bar)"></div>');
+        this.async = () => (err, source) => {
+            const cssFile = fs.readFileSync('./build/css/atomic.css', 'utf8');
+            expect(/\.Bgc\\\(foo\\\)/.test(cssFile)).to.equal(false);
+            expect(/\.C\\\(bar\\\)/.test(cssFile)).to.equal(true);
+            done();
+        };
+        this.query = {
+            configPath: [
+                path.resolve(__dirname, 'fixtures', 'simple.config.js'),
+                path.resolve(__dirname, 'fixtures', 'simple2.config.js'),
+            ],
+        };
+        atomicLoader.call(this, '<div class="Bgc(foo) C(bar)"></div>');
     });
-  
+
     it('config', (done) => {
-      this.async = () => (err, source) => {
-        const cssFile = fs.readFileSync('./build/css/atomic.css', 'utf8');
-        expect(/\.Bgc\\\(foo\\\)/.test(cssFile)).to.equal(true);
-        done();
-      };
-      this.query = {
-        config: {
-          configs: {
-            classNames: [],
-            custom: {
-              foo: 'red',
+        this.async = () => (err, source) => {
+            const cssFile = fs.readFileSync('./build/css/atomic.css', 'utf8');
+            expect(/\.Bgc\\\(foo\\\)/.test(cssFile)).to.equal(true);
+            done();
+        };
+        this.query = {
+            config: {
+                configs: {
+                    classNames: [],
+                    custom: {
+                        foo: 'red',
+                    },
+                },
             },
-          },
-        },
-      }
-      atomicLoader.call(this, '<div class="Bgc(foo)"></div>');
+        };
+        atomicLoader.call(this, '<div class="Bgc(foo)"></div>');
     });
 });

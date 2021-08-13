@@ -1,8 +1,8 @@
 module.exports = {
-  configs: {
-    classNames: [],
-    custom: {
-      foo: 'red',
+    configs: {
+        classNames: [],
+        custom: {
+            foo: 'red',
+        },
     },
-  },
-}
+};

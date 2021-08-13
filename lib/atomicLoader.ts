@@ -38,14 +38,13 @@ interface PathConfig {
     options: PathConfigOption;
 }
 
-const parseAndGenerateFile = function(
+const parseAndGenerateFile = function (
     config: PathConfig,
     source: string,
     validPostcssPlugins = [],
     minimize: boolean = false
 ): Promise<void> {
     return new Promise((resolve, reject) => {
-
         // custom rules file
         if (config.options && config.options.rules) {
             atomizer.addRules(
@@ -102,17 +101,15 @@ const atomicLoader = function (source, map) {
         validPostcssPlugins = postcssPlugins;
     }
     let configs = [
-        ...[]
-            .concat(configPath)
-            .map(configPath => require(require.resolve(configPath))),
-        ...config !== undefined ? [config] : [],
-    ]
+        ...[].concat(configPath).map((configPath) => require(require.resolve(configPath))),
+        ...(config !== undefined ? [config] : []),
+    ];
 
     if (configs.length === 0) {
-        configs.push(configObject.default)
+        configs.push(configObject.default);
     }
 
-    const tasks: Promise<void>[] = configs.map(config => {
+    const tasks: Promise<void>[] = configs.map((config) => {
         return parseAndGenerateFile(config, source, validPostcssPlugins, minimize);
     });
 

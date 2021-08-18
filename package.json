@@ -22,7 +22,7 @@
     "author": "tom76kimo <tom76kimo@gmail.com> ",
     "license": "MIT",
     "dependencies": {
-        "atomizer": "^3.9.2",
+        "atomizer": "^3.9.1",
         "cssnano": "^5.0.7",
         "loader-utils": "^2.0.0",
         "postcss": "^8.3.6"

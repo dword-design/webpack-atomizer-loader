@@ -14,6 +14,20 @@ describe('atomic loader', () => {
         };
         atomicLoader.call(this, '<div class="Bgc(yellow)"></div>');
     });
+    it('keeps already-generated css', (done) => {
+        let iteration = 0
+        this.async = () => (err, source) => {
+            if (iteration >= 1) {
+                var cssReg = new RegExp(/\.Bgc\\\(yellow\\\)/);
+                const cssFile = fs.readFileSync('./build/css/atomic.css');
+                expect(cssReg.test(cssFile)).to.equal(true);
+                done();
+            }
+            iteration += 1
+        };
+        atomicLoader.call(this, '<div class="Bgc(yellow)"></div>');
+        atomicLoader.call(this, '');
+    });
     it('rules path', (done) => {
         this.async = () => (err, source) => {
             var cssReg = new RegExp(/\.Foo/);
